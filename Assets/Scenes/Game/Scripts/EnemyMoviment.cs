@@ -16,13 +16,6 @@ public class EnemyMoviment : MonoBehaviour {
         path = new List<GridUnit>();
     }
 
-    IEnumerator Start() {
-
-        yield return new WaitForSeconds(1);
-
-        path = gridMain.GetPath();
-    }
-
     // Update is called once per frame
     void FixedUpdate() {
         if (currentNode != null) {
@@ -48,5 +41,9 @@ public class EnemyMoviment : MonoBehaviour {
         } else {
             currentNode = null;
         }
+    }
+
+    public void StartNextWave() {
+        path = gridMain.GetPath();
     }
 }

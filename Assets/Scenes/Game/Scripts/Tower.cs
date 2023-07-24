@@ -4,28 +4,32 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour {
     
-    [SerializeField] SpriteRenderer spriteRenderer;
+    public bool isAvailable { get; private set; }
+
+    [SerializeField] SpriteRenderer spriteRendererTowerSprite;
     [SerializeField] SpriteRenderer spriteRendererMinimap;
 
     GameObject goFirstChild;
     TowerStatus towerStatus;
-    bool isAvailable;
-
-    public void HandlePlaceTower(TowerStatus towerStatus) {
-        if (isAvailable) return;
-
-        this.towerStatus = towerStatus;
-        spriteRenderer.sprite = towerStatus.GetSprite();
-        spriteRenderer.color = towerStatus.GetColor();
-        UpdateMinimapSprite();
-        goFirstChild = spriteRenderer.gameObject;
-        goFirstChild.SetActive(true);
-        isAvailable = true;
-    }
 
     void UpdateMinimapSprite() {
         spriteRendererMinimap.sprite = towerStatus.GetSprite();
         spriteRendererMinimap.color = towerStatus.GetColor();
         spriteRendererMinimap.enabled = true;
     }
+
+    public void SetTowerAvailability(bool enable) {
+        isAvailable = enable;
+    }
+
+    public void HandlePlaceTower(TowerStatus towerStatus) {
+        this.towerStatus = towerStatus;
+        spriteRendererTowerSprite.sprite = towerStatus.GetSprite();
+        spriteRendererTowerSprite.color = towerStatus.GetColor();
+        UpdateMinimapSprite();
+        goFirstChild = spriteRendererTowerSprite.gameObject;
+        goFirstChild.SetActive(true);
+        isAvailable = false;
+    }
+
 }

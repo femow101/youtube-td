@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GridMain : MonoBehaviour {
     
-    const int GRID_COL_QTD = 10; // note, aways use upper case to declare constants variables :)    
-    const int GRID_LIN_QTD = 10;
+    public static int GRID_COL_QTD = 8; // note, aways use upper case to declare constants variables :)    
+    public static int GRID_LIN_QTD = 16;
 
     [SerializeField] GridUnit pfUnit;
 
@@ -64,6 +64,11 @@ public class GridMain : MonoBehaviour {
     }
 
     public List<GridUnit> GetPath() {
-        return pathfinding.FindPath(gridUnits[0, 0], gridUnits[5, 5]);
+        //  0 = full right column
+        // 15 = top column
+
+        //  7 = full left column
+        //  0 = bottom line
+        return pathfinding.FindPath(gridUnits[0, 15], gridUnits[7, 0]);
     }
 }

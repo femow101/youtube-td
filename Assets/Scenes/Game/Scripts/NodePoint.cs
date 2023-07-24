@@ -10,12 +10,14 @@ public class NodePoint {
     public int F_DistanceTotal { get; private set; }
     public int x { get; private set; }
     public int y { get; private set; }
+    public bool walkable { get; private set; }
 
     List<GridUnit> neightbors;
 
     public NodePoint(int x, int y) {
         this.x = x;
         this.y = y;
+        walkable = true;
     }
 
     public Vector3 ToPosition() {
@@ -48,11 +50,15 @@ public class NodePoint {
         neightbors.Add(gridUnit);
     }
 
-    public List<GridUnit> GetNeighbors() {
-        return neightbors;
+    public List<GridUnit> GetWalkableNeighbors() {
+        return neightbors.FindAll(grid => grid.node.walkable);
     }
 
     public void SetParent(GridUnit gridUnit) {
         parent = gridUnit;
+    }
+
+    public void SetWalkable(bool walkable) {
+        this.walkable = walkable;
     }
 }

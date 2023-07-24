@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4196e7faa1b93a1469c68e255748617b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 887487914126973436}
+  spriteRendererAvailability: {fileID: 887487914126973436}
   isPartOfPath: {fileID: 1237849018994723468}
   preview: {fileID: 1977457640076279001}
   tower: {fileID: 731269550932047167}
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 046627122826d1242b98d727db98d2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 4539912007744195508}
+  spriteRendererTowerSprite: {fileID: 4539912007744195508}
   spriteRendererMinimap: {fileID: 6114169490675875081}
 --- !u!1 &8660153070393225719
 GameObject:

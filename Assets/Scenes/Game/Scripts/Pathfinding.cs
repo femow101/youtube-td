@@ -51,17 +51,12 @@ public class Pathfinding {
 
                 path.Reverse();
 
-                Debug.Log("The path is:");
-                for (int i = 0; i < path.Count; i++) {
-                    Debug.Log($"{i + 1} = {path[i].node.ToPosition()}");
-                }
-
                 return path;
             }
 
             // Generate neighbors
             // let the neighbort of the currentNode equal the adjacent nodes
-            var neighbors = currentNode.node.GetNeighbors();
+            var neighbors = currentNode.node.GetWalkableNeighbors();
                 
             // for each child in the children
             foreach (var neighbor in neighbors) {

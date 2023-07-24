@@ -6,7 +6,7 @@ public class GridUnit : MonoBehaviour {
     
     public NodePoint node { get; private set; }
 
-    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] SpriteRenderer spriteRendererAvailability;
     [SerializeField] SpriteRenderer isPartOfPath;
     [SerializeField] GameObject preview;
     [SerializeField] Tower tower;
@@ -22,16 +22,30 @@ public class GridUnit : MonoBehaviour {
     }
 
     public void PlaceTower(TowerStatus towerStatus) {
+        if (!tower.isAvailable) { return; }
+
         tower.HandlePlaceTower(towerStatus);
-        spriteRenderer.color = Color.red;
+        node.SetWalkable(false);
+        spriteRendererAvailability.color = Color.red;
     }
 
     public void EnableDisableSpriteRenderer(bool enable) {
-        spriteRenderer.enabled = enable;
+        spriteRendererAvailability.enabled = enable;
     }
 
     public void InitializeGridUnit(int x, int y) {
+        bool notFirstLineAndNotLast = y != 0 && y != GridMain.GRID_LIN_QTD - 1;
+        bool isTopLeft = x == 0 & y == GridMain.GRID_LIN_QTD - 1;
+        bool isBottomRight = x == GridMain.GRID_COL_QTD - 1 & y == 0;
+        bool isWalkableOrPlaceable = notFirstLineAndNotLast || isTopLeft || isBottomRight;
+
         node = new NodePoint(x, y);
+        node.SetWalkable(isWalkableOrPlaceable);
+        tower.SetTowerAvailability(notFirstLineAndNotLast);
+
+        if (!isWalkableOrPlaceable) {
+            spriteRendererAvailability.color = Color.red;
+        }
     }
 
     public void SetIsPathOfThePath() {
